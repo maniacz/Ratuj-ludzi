@@ -29,7 +29,7 @@
             <TextBlock TextWrapping="Wrap" Text="Unikaj tych" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
             <ContentControl Content="ContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{DynamicResource EnemyTemplate}"/>
         </StackPanel>
-        <ProgressBar Grid.Column="1" Grid.Row="1" ValueChanged="ProgressBar_ValueChanged" Height="20"/>
+        <ProgressBar Grid.Column="1" Grid.Row="1" Height="20"/>
         <Canvas x:Name="cnvPlayArea" Grid.ColumnSpan="3">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -37,6 +37,27 @@
                     <GradientStop Color="#FF69CDC4" Offset="0.682"/>
                 </LinearGradientBrush>
             </Canvas.Background>
+            <StackPanel x:Name="stpHuman" Orientation="Vertical">
+                <Ellipse Fill="White" Height="10" Stroke="Black" Width="10"/>
+                <Rectangle Fill="White" Height="25" Stroke="Black" Width="10"/>
+            </StackPanel>
+            <TextBlock x:Name="tblGameOver" Canvas.Left="251" TextWrapping="Wrap" Text="Koniec Gry" Canvas.Top="228" FontFamily="Arial Black" FontSize="100" Foreground="White" FontWeight="Bold" FontStyle="Italic" TextDecorations="{x:Null}"/>
+            <Rectangle x:Name="rctTarget" Height="50" Canvas.Left="755" Stroke="Black" Canvas.Top="152" Width="50" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
         </Canvas>
 
     </Grid>
