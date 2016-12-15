@@ -24,12 +24,12 @@
             <RowDefinition/>
             <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
-        <Button x:Name="btnStartButton" Content="Start!" Grid.Row="1" VerticalAlignment="Center" Width="75" HorizontalAlignment="Center"/>
+        <Button x:Name="btnStartButton" Content="Start!" Grid.Row="1" VerticalAlignment="Center" Width="75" HorizontalAlignment="Center" Click="btnStartButton_Click"/>
         <StackPanel Grid.Column="2" Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock TextWrapping="Wrap" Text="Unikaj tych" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
             <ContentControl Content="ContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{DynamicResource EnemyTemplate}"/>
         </StackPanel>
-        <ProgressBar Grid.Column="1" Grid.Row="1" Height="20"/>
+        <ProgressBar x:Name="pbrProgressBar" Grid.Column="1" Grid.Row="1" Height="20"/>
         <Canvas x:Name="cnvPlayArea" Grid.ColumnSpan="3">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
