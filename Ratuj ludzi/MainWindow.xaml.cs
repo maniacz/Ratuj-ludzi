@@ -21,7 +21,7 @@ namespace Ratuj_ludzi
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Page
+    public partial class MainWindow : Window
     {
         Random random = new Random();
         DispatcherTimer enemyTimer = new DispatcherTimer();
