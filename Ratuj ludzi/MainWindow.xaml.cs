@@ -89,6 +89,14 @@ namespace Ratuj_ludzi
             AnimateEnemy(enemy, random.Next((int)cnvPlayArea.ActualHeight - 100),
                 random.Next((int)cnvPlayArea.ActualHeight - 100), "(Canvas.Top)");
             cnvPlayArea.Children.Add(enemy);
+
+            enemy.MouseEnter += enemy_MouseEnter;
+        }
+
+        void enemy_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (humanCaptured)
+                EndTheGame();
         }
 
         private void AnimateEnemy(ContentControl enemy, double from, double to, string propertyToAnimate)
@@ -104,6 +112,55 @@ namespace Ratuj_ludzi
             Storyboard.SetTargetProperty(animation, new PropertyPath(propertyToAnimate));
             storyboard.Children.Add(animation);
             storyboard.Begin();
+        }
+
+        private void stpHuman_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (enemyTimer.IsEnabled)
+            {
+                humanCaptured = true;
+                stpHuman.IsHitTestVisible = false;
+            }
+        }
+
+        private void rctTarget_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (targetTimer.IsEnabled && humanCaptured)
+            {
+                pbrProgressBar.Value = 0;
+                Canvas.SetLeft(rctTarget, random.Next(100, (int)cnvPlayArea.ActualWidth - 100));
+                Canvas.SetTop(rctTarget, random.Next(100, (int)cnvPlayArea.ActualHeight - 100));
+                Canvas.SetLeft(stpHuman, random.Next(100, (int)cnvPlayArea.ActualWidth - 100));
+                Canvas.SetTop(stpHuman, random.Next(100, (int)cnvPlayArea.ActualHeight - 100));
+                humanCaptured = false;
+                stpHuman.IsHitTestVisible = true;
+            }
+        }
+
+        private void cnvPlayArea_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (humanCaptured)
+            {
+                Point pointerPosition = e.GetPosition(null);
+                Point relativePosition = grid.TransformToVisual(cnvPlayArea).Transform(pointerPosition);
+                if ((Math.Abs(relativePosition.X - Canvas.GetLeft(stpHuman)) > stpHuman.ActualWidth * 3)
+                    || (Math.Abs(relativePosition.Y - Canvas.GetTop(stpHuman)) > stpHuman.ActualHeight * 3))
+                {
+                    humanCaptured = false;
+                    stpHuman.IsHitTestVisible = true;
+                }
+                else
+                {
+                    Canvas.SetLeft(stpHuman, relativePosition.X - stpHuman.ActualWidth / 2);
+                    Canvas.SetTop(stpHuman, relativePosition.Y - stpHuman.ActualWidth / 2);
+                }
+            }
+        }
+
+        private void cnvPlayArea_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (humanCaptured)
+                EndTheGame();
         }
     }
 }
