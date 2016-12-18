@@ -5,16 +5,36 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-	Title="Ratuj ludzi" Width="1000" Height="700">
+	Title="Ratuj ludzi" Width="1000" Height="700" Background="#FF0D0021">
     <Window.Resources>
         <ControlTemplate x:Key="EnemyTemplate" TargetType="{x:Type ContentControl}">
             <Grid>
-                <Ellipse Fill="#FFFD0000" Height="100" Stroke="Black" Width="100"/>
+                <Ellipse Fill="Gray" Height="100" Stroke="Black" Width="75"/>
+                <Ellipse Fill="Black" HorizontalAlignment="Center" Height="35" Margin="72,20,38,0" Stroke="Black" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.2,0.229">
+                    <Ellipse.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="-10"/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+                <Ellipse Fill="Black" HorizontalAlignment="Center" Height="35" Margin="38,20,72,0" Stroke="Black" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.2,0.229">
+                    <Ellipse.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="10"/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
             </Grid>
         </ControlTemplate>
     </Window.Resources>
 
-    <Grid x:Name="grid" Margin="0,0,-75,0">
+    <Grid x:Name="grid" Margin="0,0,2,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="140"/>
             <ColumnDefinition/>
@@ -24,12 +44,12 @@
             <RowDefinition/>
             <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
-        <Button x:Name="btnStartButton" Content="Start!" Grid.Row="1" VerticalAlignment="Center" Width="75" HorizontalAlignment="Center" Click="btnStartButton_Click"/>
-        <StackPanel Grid.Column="2" Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Button x:Name="btnStartButton" Content="Start!" Grid.Row="1" VerticalAlignment="Center" Width="76" HorizontalAlignment="Center" Click="btnStartButton_Click" Height="22" Margin="32,64"/>
+        <StackPanel Grid.Column="2" Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="124" Margin="14,13,10,13" Width="136">
             <TextBlock TextWrapping="Wrap" Text="Unikaj tych" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
             <ContentControl Content="ContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{DynamicResource EnemyTemplate}"/>
         </StackPanel>
-        <ProgressBar x:Name="pbrProgressBar" Grid.Column="1" Grid.Row="1" Height="20"/>
+        <ProgressBar x:Name="pbrProgressBar" Grid.Column="1" Grid.Row="1" Margin="0,65"/>
         <Canvas x:Name="cnvPlayArea" Grid.ColumnSpan="3" MouseMove="cnvPlayArea_MouseMove" MouseLeave="cnvPlayArea_MouseLeave">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
